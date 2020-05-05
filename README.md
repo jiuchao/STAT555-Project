@@ -1,5 +1,5 @@
 # STAT555-Project
 
-A [workflowr][] project.
+Project [report][].
 
-[workflowr]: https://github.com/jdblischak/workflowr
+[report]: https://jiuchao.github.io/STAT555-RNAseq/index.html
