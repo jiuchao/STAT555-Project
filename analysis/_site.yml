@@ -1,18 +1,22 @@
-name: STAT555-Project
+name: STAT555-RNAseq
 output_dir: ../docs
 navbar:
-  title: STAT555-Project
+  title: STAT555-RNAseq
   left:
   - text: Home
     href: index.html
   - text: About
     href: about.html
+  - text: Data Analysis
+    href: project.html
+  - text: Results and Discussion
+    href: results.html
   - text: License
     href: license.html
   right:
   - icon: fa-github
     text: Source code
-    href: https://github.com/jiuchao/STAT555-Project
+    href: https://github.com/jiuchao/STAT555-RNAseq
 output:
   workflowr::wflow_html:
     toc: yes

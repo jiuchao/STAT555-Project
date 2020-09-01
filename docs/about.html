@@ -179,7 +179,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">STAT555-Project</a>
+      <a class="navbar-brand" href="index.html">STAT555-RNAseq</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -190,12 +190,18 @@ $(document).ready(function () {
   <a href="about.html">About</a>
 </li>
 <li>
+  <a href="project.html">Data Analysis</a>
+</li>
+<li>
+  <a href="results.html">Results and Discussion</a>
+</li>
+<li>
   <a href="license.html">License</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/jiuchao/STAT555-Project">
+  <a href="https://github.com/jiuchao/STAT555-RNAseq">
     <span class="fa fa-github"></span>
      
     Source code
@@ -248,7 +254,7 @@ div.section {
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
-<strong>Knit directory:</strong> <code>STAT555-Project/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong> <code>STAT555-RNAseq/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
@@ -273,16 +279,33 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjiuchaoSTAT555Projecttree0c798a99846398eca4d9f49c6079e57464a518abtargetblank0c798a9a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jiuchao/STAT555-Project/tree/0c798a99846398eca4d9f49c6079e57464a518ab" target="_blank">0c798a9</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjiuchaoSTAT555RNAseqtree5483586db2e48944d3e256f1f7fb8226017466aftargetblank5483586a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jiuchao/STAT555-RNAseq/tree/5483586db2e48944d3e256f1f7fb8226017466af" target="_blank">5483586</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjiuchaoSTAT555Projecttree0c798a99846398eca4d9f49c6079e57464a518abtargetblank0c798a9a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjiuchaoSTAT555RNAseqtree5483586db2e48944d3e256f1f7fb8226017466aftargetblank5483586a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
-working directory clean
+Ignored files:
+    Ignored:    analysis/figure/
+
+Untracked files:
+    Untracked:  DESeq2 size factors.csv
+    Untracked:  TMM normalization factors.csv
+    Untracked:  analysis/GSE74201_rawReadCounts.csv
+    Untracked:  docs/assets/
+    Untracked:  downRegulated Genes CTvsHDiPSC.txt
+    Untracked:  downRegulated Genes in NSC.txt
+    Untracked:  pca3d.tiff
+    Untracked:  summary of pca.csv
+    Untracked:  upRegulated Genes CTvsHDiPSC.txt
+    Untracked:  upRegulated Genes in NSC.txt
+
+Unstaged changes:
+    Modified:   analysis/index.Rmd
+
 </code></pre>
 <p>
 Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
@@ -322,44 +345,10 @@ Message
 <tbody>
 <tr>
 <td>
-Rmd
-</td>
-<td>
-<a href="https://github.com/jiuchao/STAT555-Project/blob/0c798a99846398eca4d9f49c6079e57464a518ab/analysis/about.Rmd" target="_blank">0c798a9</a>
-</td>
-<td>
-jiuchao
-</td>
-<td>
-2019-06-06
-</td>
-<td>
-Add introduction
-</td>
-</tr>
-<tr>
-<td>
 html
 </td>
 <td>
-<a href="https://rawcdn.githack.com/jiuchao/STAT555-Project/647b37c457971d64b4175fe2e10638311c34c58c/docs/about.html" target="_blank">647b37c</a>
-</td>
-<td>
-jiuchao
-</td>
-<td>
-2019-06-06
-</td>
-<td>
-Build site.
-</td>
-</tr>
-<tr>
-<td>
-html
-</td>
-<td>
-<a href="https://rawcdn.githack.com/jiuchao/STAT555-Project/89e824252c229801162b79632de3e9271ea1afad/docs/about.html" target="_blank">89e8242</a>
+<a href="https://rawcdn.githack.com/jiuchao/STAT555-RNAseq/cfa5d92c7281769358efaf98a0134e182041e208/docs/about.html" target="_blank">cfa5d92</a>
 </td>
 <td>
 jiuchao
@@ -376,7 +365,58 @@ Build site.
 Rmd
 </td>
 <td>
-<a href="https://github.com/jiuchao/STAT555-Project/blob/96075ae4f007d3d76cb9c1aa4bca1b32ed3a5317/analysis/about.Rmd" target="_blank">96075ae</a>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/596bf9d1ab2c9791e0f98cddbd52b1cd2742b1f2/analysis/about.Rmd" target="_blank">596bf9d</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+<td>
+add work report
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jiuchao/STAT555-RNAseq/4e2fc972e065d5f03b84b89f5a175f50f6cb9845/docs/about.html" target="_blank">4e2fc97</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jiuchao/STAT555-RNAseq/f3ca2d22a53e08a15730f04c5e49a41cd502c6c7/docs/about.html" target="_blank">f3ca2d2</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/65bd420e518d82eed79a91940d2d83fed20f72b2/analysis/about.Rmd" target="_blank">65bd420</a>
 </td>
 <td>
 jiuchao
@@ -396,22 +436,8 @@ Start workflowr project.
 </div>
 </div>
 <div id="abstract" class="section level1">
-<h1><strong>Abstract</strong></h1>
+<h1><strong>ABSTRACT</strong></h1>
 <p>Huntington’s disease (HD) is an inherited neural degenerative disease that will cause gradual neuronal loss in human brain, which further results in movement disorders, psychological changes, and cognitive decline. In this study, induced pluripotent stem cells (iPSCs) from HD patients and the corresponding differentiated neural stem cells (NSCs) were utilized as HD models. Large-scale transcriptome comparison with genetic corrected isogenic control (CT) iPSCs and NSCs showed that HD cells had more difference in differentiated NSC stage than undifferentiated iPSC stage, which is consistent with previous study demonstrating that some disease phenotypes were apparent in HD NSCs but not iPSCs. Categories of differentially expressed genes (DEGs) were also identified in by gene ontology (GO) enrichment analysis. In addition, utilizing such data sets, I was also able to compare the powers of DESeq2 with built-in RLE normalization, edgeR and DESeq2 using TMM normalization. Based on data sets from this paper, I found that DESeq2 using TMM normalization was less powerful than its built-in RLE normalization, the latter of which had similar power with edgeR.</p>
-</div>
-<div id="introduction" class="section level1">
-<h1><strong>Introduction</strong></h1>
-<p>Huntington’s Disease (HD) is a genetically inherited disease caused by expansion of CAG (cytosine-adenine-guanine) triplet repeats in the coding region of huntingtin protein (HTT). Such abnormal HTT protein will cause neuronal loss in human brain regions like cortex and striatum (Aronin et al., 1995), which further leads to movement disorders, psychological changes, and cognitive decline (Victorson et al., 2014).</p>
-<p>Previous work identified induced pluripotent stem cells (iPSCs) from HD patients and the differentiated neural stem cells (NSCs) as good HD models for mechanistic studies and drug screening (Zhang et al., 2010). iPSCs are pluripotent stem cells that can be reprogrammed from somatic cells, and have the ability to differentiate to any types of somatic cells. NSCs are multipotent stem cells differentiated from pluripotent stem cells, generating mainly neurons and glial cells in the nervous system. Genetic defects of HD-patient-derived iPSCs was successfully corrected previously (An et al., 2012). What is more, characterization of the genetic corrected iPSCs and NSCs showed normalization of cellular phenotypes (An et al., 2012). Therefore, such genetic corrected iPSCs and NSCs serve well as isogenic controls in mechanism study.</p>
-<p>Microarray-based gene expression analysis comparing iPSCs from HD and corrected lines previously revealed some useful insights in terms of establishing HD cell models, but also showed that global gene expression remained essentially unchanged at iPSC stage. In contrast, disease phenotypes were manifest in NSC stage concerning cell death, mitochondria dysfunction and susceptibility to growth factor withdrawal (An et al., 2012). However, the characterization with NSCs was only measured by immunohistochemistry and RT-PCR analysis, but not with microarray. To better understand gene expression change caused by HTT protein dysfunction in HD model, large-scale analysis should be performed with not only iPSCs but also NSCs.</p>
-<p>In this work, the author utilized HD-patient-derived iPSCs and NSCs as HD models and genetic corrected iPSCs and NSCs as isogenic controls. Transcriptome change measured by RNAseq was performed with both iPSCs and NSCs from HD and control cell lines. This work revealed large-scale gene expression changes caused by HTT protein dysfunction and the gene ontology categories the differentially expressed genes (DEGs) belong to (Ring et al., 2015).</p>
-</div>
-<div id="background-and-data" class="section level1">
-<h1><strong>BACKGROUND AND DATA</strong></h1>
-<p>In my project, I used raw read counts obtained by RNAseq from Ring’s work (Ring et al., 2015), which is available in Gene Expression Omnibus (GEO: GSE74201). The data consisted of four conditions: CT iPSC, CT NSC, HD iPSC and HD NSC, with 8 replicates in each condition.</p>
-<p>In the original paper, the author did two comparisons: HD versus CT iPSCs and HD versus CT NSCs. Differential expression analysis and weighted co-expression analyses were performed with edgeR and weighted gene coexpression network analysis (WGCNA) packages. After determining clusters of co-regulated genes, the author assessed the gene ontology (GO) annotation of each clusters with DAVID (full names: Database for Annotation, Visualization and Integrated Discovery).</p>
-<p>In order to understand gene expression change related to HD, I did the same comparisons: HD versus CT iPSCs and HD versus CT NSCs. The difference was that I used DESeq2 package (Love et al., 2014) to analyze differential expression, and performed GO analysis with Gene Ontology enRIchment anaLysis and visuaLizAtion tool (GOrilla) (Eden et al., 2009).</p>
-<p>To assess the power difference among the various differential expression analysis packages, I also compared the power of DESeq2 with built-in RLE normalization, edgeR (Robinson et al., 2010) and DESeq2 with TMM normalization. Other than the two pairwise comparisons I did for studying gene expression changes related to HD, I added one more comparison CT NSC versus CT iPSC for the purpose of power assessment.</p>
 </div>
 
 

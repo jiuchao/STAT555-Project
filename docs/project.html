@@ -1,0 +1,3252 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="jiuchao" />
+
+<meta name="date" content="2019-06-06" />
+
+<title>project</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">STAT555-RNAseq</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="project.html">Data Analysis</a>
+</li>
+<li>
+  <a href="results.html">Results and Discussion</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jiuchao/STAT555-RNAseq">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">project</h1>
+<h4 class="author"><em>jiuchao</em></h4>
+<h4 class="date"><em>2019-06-06</em></h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2019-06-06
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>STAT555-RNAseq/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.3.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20190606code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20190606)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20190606code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20190606)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjiuchaoSTAT555RNAseqtree5483586db2e48944d3e256f1f7fb8226017466aftargetblank5483586a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jiuchao/STAT555-RNAseq/tree/5483586db2e48944d3e256f1f7fb8226017466af" target="_blank">5483586</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjiuchaoSTAT555RNAseqtree5483586db2e48944d3e256f1f7fb8226017466aftargetblank5483586a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    analysis/figure/
+
+Untracked files:
+    Untracked:  DESeq2 size factors.csv
+    Untracked:  TMM normalization factors.csv
+    Untracked:  analysis/GSE74201_rawReadCounts.csv
+    Untracked:  docs/assets/
+    Untracked:  downRegulated Genes CTvsHDiPSC.txt
+    Untracked:  downRegulated Genes in NSC.txt
+    Untracked:  pca3d.tiff
+    Untracked:  summary of pca.csv
+    Untracked:  upRegulated Genes CTvsHDiPSC.txt
+    Untracked:  upRegulated Genes in NSC.txt
+
+Unstaged changes:
+    Modified:   analysis/index.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jiuchao/STAT555-RNAseq/4e2fc972e065d5f03b84b89f5a175f50f6cb9845/docs/project.html" target="_blank">4e2fc97</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jiuchao/STAT555-RNAseq/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/project.html" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/268472d69747a1252b446949f4f5c0331861f420/analysis/project.Rmd" target="_blank">268472d</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+<td>
+add analysis
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="preliminaries" class="section level1">
+<h1>Preliminaries</h1>
+<p>Load the R software libraries required to do the project.</p>
+<pre class="r"><code>library(hexbin)
+library(DESeq2)</code></pre>
+<pre><code>Loading required package: S4Vectors</code></pre>
+<pre><code>Loading required package: stats4</code></pre>
+<pre><code>Loading required package: BiocGenerics</code></pre>
+<pre><code>Loading required package: parallel</code></pre>
+<pre><code>
+Attaching package: &#39;BiocGenerics&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:parallel&#39;:
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB</code></pre>
+<pre><code>The following objects are masked from &#39;package:stats&#39;:
+
+    IQR, mad, sd, var, xtabs</code></pre>
+<pre><code>The following objects are masked from &#39;package:base&#39;:
+
+    anyDuplicated, append, as.data.frame, basename, cbind,
+    colMeans, colnames, colSums, dirname, do.call, duplicated,
+    eval, evalq, Filter, Find, get, grep, grepl, intersect,
+    is.unsorted, lapply, lengths, Map, mapply, match, mget, order,
+    paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind,
+    Reduce, rowMeans, rownames, rowSums, sapply, setdiff, sort,
+    table, tapply, union, unique, unsplit, which, which.max,
+    which.min</code></pre>
+<pre><code>
+Attaching package: &#39;S4Vectors&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:base&#39;:
+
+    expand.grid</code></pre>
+<pre><code>Loading required package: IRanges</code></pre>
+<pre><code>
+Attaching package: &#39;IRanges&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:grDevices&#39;:
+
+    windows</code></pre>
+<pre><code>Loading required package: GenomicRanges</code></pre>
+<pre><code>Loading required package: GenomeInfoDb</code></pre>
+<pre><code>Loading required package: SummarizedExperiment</code></pre>
+<pre><code>Loading required package: Biobase</code></pre>
+<pre><code>Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    &#39;browseVignettes()&#39;. To cite Bioconductor, see
+    &#39;citation(&quot;Biobase&quot;)&#39;, and for packages &#39;citation(&quot;pkgname&quot;)&#39;.</code></pre>
+<pre><code>Loading required package: DelayedArray</code></pre>
+<pre><code>Loading required package: matrixStats</code></pre>
+<pre><code>
+Attaching package: &#39;matrixStats&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:Biobase&#39;:
+
+    anyMissing, rowMedians</code></pre>
+<pre><code>Loading required package: BiocParallel</code></pre>
+<pre><code>
+Attaching package: &#39;DelayedArray&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:matrixStats&#39;:
+
+    colMaxs, colMins, colRanges, rowMaxs, rowMins, rowRanges</code></pre>
+<pre><code>The following objects are masked from &#39;package:base&#39;:
+
+    aperm, apply</code></pre>
+<pre class="r"><code>library(edgeR)</code></pre>
+<pre><code>Loading required package: limma</code></pre>
+<pre><code>
+Attaching package: &#39;limma&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:DESeq2&#39;:
+
+    plotMA</code></pre>
+<pre><code>The following object is masked from &#39;package:BiocGenerics&#39;:
+
+    plotMA</code></pre>
+<pre class="r"><code>library(qvalue)
+library(FactoMineR)
+library(gplots)</code></pre>
+<pre><code>
+Attaching package: &#39;gplots&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:IRanges&#39;:
+
+    space</code></pre>
+<pre><code>The following object is masked from &#39;package:S4Vectors&#39;:
+
+    space</code></pre>
+<pre><code>The following object is masked from &#39;package:stats&#39;:
+
+    lowess</code></pre>
+<pre class="r"><code>library(RColorBrewer)
+library(pca3d)</code></pre>
+</div>
+<div id="rna-seq-data" class="section level1">
+<h1>1. RNA-seq Data</h1>
+<div id="create-the-rna-seq-count-matrix." class="section level2">
+<h2>1.1 Create the RNA-seq count matrix.</h2>
+<pre class="r"><code>reads = read.csv(&quot;analysis/GSE74201_rawReadCounts.csv&quot;, header = T, row.names = 1)
+dim(reads)</code></pre>
+<pre><code>[1] 22506    32</code></pre>
+<pre class="r"><code>colnames(reads) = paste(rep(c(&quot;CT_NSC&quot;, &quot;CT_iPSC&quot;, &quot;HD_NSC&quot;, &quot;HD_iPSC&quot;), each=8), rep(c(1:8), 4))
+reads[1:10,]</code></pre>
+<pre><code>          CT_NSC 1 CT_NSC 2 CT_NSC 3 CT_NSC 4 CT_NSC 5 CT_NSC 6 CT_NSC 7
+ACTG1       113419   115727   100639    97065   101324   105197   112475
+ACTB         84151    88863    76511    73913    75466    79135    90264
+RPL3         52703    51904    48555    45395    47168    48988    46702
+GAPDH        58319    56809    49762    48065    50149    52756    52970
+GNAS         81324    84549    68604    67267    72992    74836    81110
+HMGA1        20103    20087    17884    17892    18534    19287    20865
+RPS19        29469    32227    29556    28431    27743    27781    29150
+HSP90B1      20167    19958    18871    16399    17222    17861    18656
+HNRNPA2B1    41020    43998    34950    34990    34347    35550    38635
+EEF1A1       56014    58871    52314    50760    50682    51170    51365
+          CT_NSC 8 CT_iPSC 1 CT_iPSC 2 CT_iPSC 3 CT_iPSC 4 CT_iPSC 5
+ACTG1        99720     50004     58281     55528     71057     48612
+ACTB         77132     61924     71601     74410     88842     65799
+RPL3         46256     36473     42333     40663     52495     35869
+GAPDH        48144     55073     67575     57294     76422     51522
+GNAS         69956     14520     16946     17013     21180     14997
+HMGA1        17525     35709     43352     40829     52233     35202
+RPS19        27916     16126     19202     18594     26412     16136
+HSP90B1      16920     18224     21758     19785     24897     17435
+HNRNPA2B1    39106     26676     29321     34047     37219     28379
+EEF1A1       49302     42763     50875     49177     65832     41261
+          CT_iPSC 6 CT_iPSC 7 CT_iPSC 8 HD_NSC 1 HD_NSC 2 HD_NSC 3
+ACTG1         53337     48577     60080    99112   111297   140926
+ACTB          69050     66635     79832    82695    89975   108990
+RPL3          38741     35944     42922    40699    46100    58926
+GAPDH         57676     52659     64661    48004    51725    64874
+GNAS          15755     14492     18334    79657    90086   106687
+HMGA1         37777     35021     43830    16730    18462    22430
+RPS19         17536     18066     20385    22917    28556    34162
+HSP90B1       18841     16658     21635    17129    19673    26876
+HNRNPA2B1     29782     26853     32050    33624    38828    45565
+EEF1A1        43875     42359     52088    45305    55503    76822
+          HD_NSC 4 HD_NSC 5 HD_NSC 6 HD_NSC 7 HD_NSC 8 HD_iPSC 1 HD_iPSC 2
+ACTG1       114817    99884   117296   116319   101994     55495     57677
+ACTB         89987    78771    93560    96170    82570     69753     71757
+RPL3         47849    44844    50257    47031    40376     41201     45752
+GAPDH        56552    49632    57455    53449    49765     60703     67657
+GNAS         86985    82729    97349    93286    80310     18179     18081
+HMGA1        19800    16628    20498    19827    17428     39853     45617
+RPS19        28390    26730    29004    28335    23382     17330     21017
+HSP90B1      21173    19487    21719    21548    17685     21421     21335
+HNRNPA2B1    36435    37533    39419    40166    34051     31719     28743
+EEF1A1       55333    53852    57711    56353    47278     51392     56691
+          HD_iPSC 3 HD_iPSC 4 HD_iPSC 5 HD_iPSC 6 HD_iPSC 7 HD_iPSC 8
+ACTG1         57166     55263     58168     58923     52363     53036
+ACTB          78932     76185     74597     75800     74163     73997
+RPL3          41384     41460     47378     48067     36334     36058
+GAPDH         59462     59079     64690     70837     53721     54471
+GNAS          17900     18467     18625     18213     15674     16681
+HMGA1         42853     43212     43781     44048     37244     37802
+RPS19         20864     19992     23203     23238     18297     17792
+HSP90B1       21128     19754     20673     22382     17700     18000
+HNRNPA2B1     30285     31027     31972     32460     26856     29551
+EEF1A1        51611     49549     61038     59603     41095     42707</code></pre>
+<p>`</p>
+<hr />
+</div>
+<div id="quality-assessment" class="section level2">
+<h2>1.2 Quality assessment</h2>
+<div id="draw-a-histogram-of-log2counts0.25-for-each-sample." class="section level3">
+<h3>1.2.1 Draw a histogram of log2(counts+0.25) for each sample.</h3>
+<pre class="r"><code>logreads = log2(reads+0.25)
+par(mfrow=c(8,4))
+for (i in 1:32) hist(logreads[,i],main=colnames(logreads)[i], nclass = 50)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-1-1.png" width="1248" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-1-1">
+Past versions of unnamed-chunk-1-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-1-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-1-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="use-hexplom-to-draw-scatterplots-of-the-log2counts." class="section level3">
+<h3>1.2.2 Use <strong>hexplom</strong> to draw scatterplots of the log2(counts).</h3>
+<pre class="r"><code>plot(hexplom(logreads[,1:32]))</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-2-1.png" width="1248" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-2-1">
+Past versions of unnamed-chunk-2-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-2-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="compute-the-total-library-size-for-each-of-the-12-libraries." class="section level3">
+<h3>1.2.3 Compute the total library size for each of the 12 libraries.</h3>
+<pre class="r"><code>lib.size=colSums(reads)
+lib.size</code></pre>
+<pre><code> CT_NSC 1  CT_NSC 2  CT_NSC 3  CT_NSC 4  CT_NSC 5  CT_NSC 6  CT_NSC 7 
+ 19607706  19814499  17454073  16466850  16991936  17861183  18910539 
+ CT_NSC 8 CT_iPSC 1 CT_iPSC 2 CT_iPSC 3 CT_iPSC 4 CT_iPSC 5 CT_iPSC 6 
+ 16966083  14183353  16356787  16075904  19648775  14080676  15311492 
+CT_iPSC 7 CT_iPSC 8  HD_NSC 1  HD_NSC 2  HD_NSC 3  HD_NSC 4  HD_NSC 5 
+ 13586886  16687870  16035612  17812738  22986648  19327528  17100262 
+ HD_NSC 6  HD_NSC 7  HD_NSC 8 HD_iPSC 1 HD_iPSC 2 HD_iPSC 3 HD_iPSC 4 
+ 19674265  18939504  16482500  16263660  16982989  16356192  16463954 
+HD_iPSC 5 HD_iPSC 6 HD_iPSC 7 HD_iPSC 8 
+ 17064944  17476873  14593949  15067593 </code></pre>
+</div>
+<div id="boxplot-of-logreads-for-each-sample." class="section level3">
+<h3>1.2.4 Boxplot of logreads for each sample.</h3>
+<pre class="r"><code>boxplot(logreads, outline = TRUE,col = paste(rep(c(&quot;Red&quot;, &quot;Blue&quot;, &quot;orange&quot;, &quot;cyan&quot;), each=8)), main = &quot;Boxplot of log2(Gene Expression) of Sample 1 to 32&quot;, ylab = &quot;log2 Gene Expression&quot;)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-4-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="finally-cluster-the-samples-to-get-the-big-picture-of-whether-there-are-differences-among-different-conditions." class="section level3">
+<h3>1.2.5 Finally, cluster the samples to get the big picture of whether there are differences among different conditions.</h3>
+<pre class="r"><code>par(mfrow=c(1,1))
+dist=dist(t(logreads))
+plot(hclust(dist))</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-5-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr />
+</div>
+</div>
+<div id="rna-seq-data-filtering-and-normalization" class="section level2">
+<h2>1.2 RNA-seq data filtering and Normalization</h2>
+<div id="discard-features-with-fewer-than-10-reads-in-all-the-samples-as-there-is-no-power-to-detect-differential-expression-analysis-for-features-with-very-low-total-counts.-create-a-new-count-matrix-with-genes-with-at-least-10-reads-per-feature-and-call-it-bigreads." class="section level3">
+<h3>1.2.1 Discard features with fewer than 10 reads in all the samples as there is no power to detect differential expression analysis for features with very low total counts. Create a new count matrix with genes with at least 10 reads per feature and call it bigReads.</h3>
+<pre class="r"><code>geneSum = rowSums(reads)
+bigReads = reads[geneSum&gt;=10,]
+nrow(bigReads)</code></pre>
+<pre><code>[1] 18687</code></pre>
+</div>
+<div id="normalize-data-with-tmm-in-edger-and-compute-the-dispersion." class="section level3">
+<h3>1.2.2 Normalize data with <strong>TMM</strong> in <strong>edgeR</strong> and compute the dispersion.</h3>
+<pre class="r"><code>condition=as.factor(paste(rep(c(&quot;CT_NSC&quot;,&quot;CT_iPSC&quot;, &quot;HD_NSC&quot;, &quot;HD_iPSC&quot;), each = 8)))
+condition</code></pre>
+<pre><code> [1] CT_NSC  CT_NSC  CT_NSC  CT_NSC  CT_NSC  CT_NSC  CT_NSC  CT_NSC 
+ [9] CT_iPSC CT_iPSC CT_iPSC CT_iPSC CT_iPSC CT_iPSC CT_iPSC CT_iPSC
+[17] HD_NSC  HD_NSC  HD_NSC  HD_NSC  HD_NSC  HD_NSC  HD_NSC  HD_NSC 
+[25] HD_iPSC HD_iPSC HD_iPSC HD_iPSC HD_iPSC HD_iPSC HD_iPSC HD_iPSC
+Levels: CT_iPSC CT_NSC HD_iPSC HD_NSC</code></pre>
+<pre class="r"><code>d=DGEList(counts=bigReads, group=condition,genes=rownames(bigReads))
+d=calcNormFactors(d,method=&quot;TMM&quot;)
+write.csv(d$samples$norm.factors, file =&quot;TMM normalization factors.csv&quot;, quote = FALSE)
+designmatrix = model.matrix(~0+condition)
+colnames(designmatrix) &lt;- levels(condition)
+d=estimateDisp(d,designmatrix,robust=TRUE)
+plotBCV(d)</code></pre>
+<p><img src="figure/project.Rmd/TMMNormalization-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-TMMNormalization-1">
+Past versions of TMMNormalization-1.png
+</button>
+</p>
+<div id="fig-TMMNormalization-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/TMMNormalization-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="run-deseq-and-extract-the-normalized-counts-for-visualization." class="section level3">
+<h3>1.2.3 Run <strong>DESeq</strong> and extract the normalized counts for visualization.</h3>
+<pre class="r"><code>samples = colnames(bigReads)
+colData = data.frame(samples=samples,condition=condition)
+dds = DESeqDataSetFromMatrix(countData=bigReads, colData=colData, design = ~ condition)
+dds = DESeq(dds)</code></pre>
+<pre><code>estimating size factors</code></pre>
+<pre><code>estimating dispersions</code></pre>
+<pre><code>gene-wise dispersion estimates</code></pre>
+<pre><code>mean-dispersion relationship</code></pre>
+<pre><code>final dispersion estimates</code></pre>
+<pre><code>fitting model and testing</code></pre>
+<pre><code>-- replacing outliers and refitting for 2 genes
+-- DESeq argument &#39;minReplicatesForReplace&#39; = 7 
+-- original counts are preserved in counts(dds)</code></pre>
+<pre><code>estimating dispersions</code></pre>
+<pre><code>fitting model and testing</code></pre>
+<pre class="r"><code>res = results(dds)
+
+#Compute normalized counts
+nc = counts(dds,normalized=TRUE)
+rld = assay(rlog(dds, blind = FALSE))</code></pre>
+<pre><code>rlog() may take a few minutes with 30 or more samples,
+vst() is a much faster transformation</code></pre>
+<p>Save the size factors after and plot the dispersion after <strong>DESeq2</strong> normalization.</p>
+<pre class="r"><code>write.csv(dds$sizeFactor, &quot;DESeq2 size factors.csv&quot;, quote = FALSE)
+plotDispEsts(dds)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-8-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr />
+</div>
+</div>
+<div id="check-data-quality-after-deseq2-normalization" class="section level2">
+<h2>1.3 Check data quality after <strong>DESeq2</strong> normalization</h2>
+<div id="redo-the-histograms-with-log2normalized-counts." class="section level3">
+<h3>1.3.1 Redo the histograms with log2(normalized counts).</h3>
+<pre class="r"><code>lognc = log2(nc+0.25)
+par(mfrow=c(8,4))
+for (i in 1:32) hist(lognc[,i],main=colnames(lognc)[i], nclass = 50)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-9-1.png" width="1248" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-9-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="redo-the-scatter-plot-matrix-with-log2normalized-counts." class="section level3">
+<h3>1.3.2 Redo the scatter plot matrix with log2(normalized counts).</h3>
+<pre class="r"><code>plot(hexplom(lognc[,1:32]))</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-10-1.png" width="1248" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-1">
+Past versions of unnamed-chunk-10-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-10-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="principle-component-analysis-with-normalized-counts." class="section level3">
+<h3>1.3.3 Principle Component Analysis with normalized counts.</h3>
+<pre class="r"><code>pca = prcomp(t(nc), scale. = TRUE)
+pca_sum = summary(pca)
+pca_sum</code></pre>
+<pre><code>Importance of components:
+                            PC1      PC2      PC3      PC4      PC5
+Standard deviation     108.3378 39.10640 27.09451 19.27273 18.48070
+Proportion of Variance   0.6281  0.08184  0.03928  0.01988  0.01828
+Cumulative Proportion    0.6281  0.70993  0.74921  0.76909  0.78736
+                            PC6      PC7      PC8      PC9     PC10
+Standard deviation     17.69771 15.17885 14.73229 14.15090 13.71388
+Proportion of Variance  0.01676  0.01233  0.01161  0.01072  0.01006
+Cumulative Proportion   0.80412  0.81645  0.82807  0.83878  0.84885
+                           PC11     PC12     PC13     PC14     PC15
+Standard deviation     13.57296 13.22061 12.95733 12.72414 12.70002
+Proportion of Variance  0.00986  0.00935  0.00898  0.00866  0.00863
+Cumulative Proportion   0.85871  0.86806  0.87704  0.88571  0.89434
+                           PC16     PC17     PC18     PC19     PC20
+Standard deviation     12.46830 12.23533 11.91292 11.71895 11.55643
+Proportion of Variance  0.00832  0.00801  0.00759  0.00735  0.00715
+Cumulative Proportion   0.90266  0.91067  0.91826  0.92561  0.93276
+                           PC21     PC22    PC23     PC24     PC25
+Standard deviation     11.35986 11.28378 11.1917 10.90336 10.70875
+Proportion of Variance  0.00691  0.00681  0.0067  0.00636  0.00614
+Cumulative Proportion   0.93967  0.94648  0.9532  0.95954  0.96568
+                           PC26     PC27     PC28     PC29     PC30
+Standard deviation     10.64921 10.51334 10.44829 10.37723 10.10305
+Proportion of Variance  0.00607  0.00591  0.00584  0.00576  0.00546
+Cumulative Proportion   0.97175  0.97766  0.98351  0.98927  0.99473
+                          PC31      PC32
+Standard deviation     9.92267 7.579e-14
+Proportion of Variance 0.00527 0.000e+00
+Cumulative Proportion  1.00000 1.000e+00</code></pre>
+<pre class="r"><code>write.csv(pca_sum$importance,file=&quot;summary of pca.csv&quot;, quote=FALSE)
+
+#2D demonstration
+plot(pca$x[, 1], pca$x[, 2], col = rep(c(&quot;red&quot;,&quot;blue&quot;,&quot;orange&quot;,&quot;cyan&quot;),each = 8), main = &quot;Principle Component Analysis&quot;, xlab = &quot;PC1:63% variance&quot;, ylab = &quot;PC2:8% variace&quot;)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-11-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>plot(pca$x[, 1], pca$x[, 3], col = rep(c(&quot;red&quot;,&quot;blue&quot;,&quot;orange&quot;,&quot;cyan&quot;),each = 8), main = &quot;Principle Component Analysis&quot;, xlab = &quot;PC1:63% variance&quot;, ylab = &quot;PC3: 4% variance&quot;)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-11-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-2">
+Past versions of unnamed-chunk-11-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-11-2.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>#3d demonstration
+pca3d(pca, group=condition, col = rep(c(&quot;red&quot;,&quot;blue&quot;,&quot;orange&quot;,&quot;cyan&quot;),each = 8), axe.titles = c(&quot;PC1:63% variance&quot;, &quot;PC2:8% variance&quot;,&quot;PC3:4% variance&quot;), radius = 2)</code></pre>
+<pre><code>[1] 4.424554 2.907972 1.610897
+Creating new device</code></pre>
+<pre class="r"><code>snapshotPCA3d(file=&quot;pca3d.tiff&quot;)</code></pre>
+</div>
+<div id="boxplot-demonstration-of-log2normalized-counts." class="section level3">
+<h3>1.3.4 Boxplot demonstration of log2(normalized counts).</h3>
+<pre class="r"><code>boxplot(lognc, outline = TRUE,col = paste(rep(c(&quot;Red&quot;, &quot;Blue&quot;, &quot;orange&quot;, &quot;cyan&quot;), each=8)), main = &quot;Boxplot of log2(normalized counts) of four conditions&quot;, ylab = &quot;log2 Gene Expression&quot;)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-12-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="heatmap-of-sample-to-sample-distances." class="section level3">
+<h3>1.3.5 Heatmap of sample-to-sample distances.</h3>
+<pre class="r"><code>distMatrix = dist(t(lognc))
+a = as.dendrogram(hclust(distMatrix))
+plot((hclust(distMatrix)))</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-1">
+Past versions of unnamed-chunk-13-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-13-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-13-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>sampleDistMatrix = as.matrix(distMatrix)
+colours = colorRampPalette(rev(brewer.pal(9, &quot;Blues&quot;)) )(255)
+heatmap.2(sampleDistMatrix, trace = &quot;none&quot;, col = colours, Rowv = a, Colv = a)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-14-1.png" width="864" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-1">
+Past versions of unnamed-chunk-14-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-14-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr />
+</div>
+</div>
+</div>
+<div id="differential-expression-analysis-of-hd-nsc-and-ct-nsc--deseq2" class="section level1">
+<h1>2. Differential Expression Analysis of “HD NSC” and “CT NSC”- <strong>DESeq2</strong></h1>
+<div id="extract-differential-expression-results-of-hd_nsc-vs-ct_nsc-from-dds." class="section level2">
+<h2>2.1 Extract differential expression results of “HD_NSC vs CT_NSC” from dds.</h2>
+<pre class="r"><code>res_CTvsHDNSC = results(dds, contrast = c(&quot;condition&quot;, &quot;HD_NSC&quot;, &quot;CT_NSC&quot;))</code></pre>
+</div>
+<div id="plot-histogram-of-p-values-and-estimate-pi0-with-qvalue-function." class="section level2">
+<h2>2.2 Plot histogram of p-values and estimate pi0 with qvalue function.</h2>
+<pre class="r"><code>hist(res_CTvsHDNSC$pvalue, nclass=50, main = &quot;DESeq2&quot;, xlab = &quot;p-values&quot;)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-16-1">
+Past versions of unnamed-chunk-16-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-16-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-16-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>qDESeq_CTvsHDNSC = qvalue(res_CTvsHDNSC$pvalue)
+qDESeq_CTvsHDNSC$pi0</code></pre>
+<pre><code>[1] 0.7741034</code></pre>
+</div>
+<div id="repalce-genes-with-ajusted-pvalues-as-na-with-1-for-degs-calculation." class="section level2">
+<h2>2.3 repalce genes with ajusted pvalues as “NA” with 1 for DEGs calculation.</h2>
+<pre class="r"><code>NA_CTvsHDNSC =sum(is.na(res_CTvsHDNSC$padj))
+nc_CTvsHDNSC = nc[,c(1:8, 17:24)]
+dim(nc_CTvsHDNSC)</code></pre>
+<pre><code>[1] 18687    16</code></pre>
+<pre class="r"><code>rld_CTvsHDNSC = rld[,c(1:8, 17:24)]
+dim(rld_CTvsHDNSC)</code></pre>
+<pre><code>[1] 18687    16</code></pre>
+<pre class="r"><code>res_CTvsHDNSC[is.na(res_CTvsHDNSC$padj),]$padj = rep(1, NA_CTvsHDNSC)
+dim(res_CTvsHDNSC)</code></pre>
+<pre><code>[1] 18687     6</code></pre>
+</div>
+<div id="save-rlog-transformed-data-of-differentially-expressed-genes-with-padj-0.01-for-data-visualization-later." class="section level2">
+<h2>2.4 Save rlog transformed data of differentially expressed genes with padj &lt; 0.01 for data visualization later.</h2>
+<pre class="r"><code>sum(res_CTvsHDNSC$padj&lt;0.01)</code></pre>
+<pre><code>[1] 3611</code></pre>
+<pre class="r"><code>DEGs_CTvsHDNSC = nc[res_CTvsHDNSC$padj&lt;0.01,c(1:8, 17:24)]
+rldDEGs_CTvsHDNSC = rld[res_CTvsHDNSC$padj&lt;0.01,c(1:8, 17:24)]
+dim(DEGs_CTvsHDNSC)</code></pre>
+<pre><code>[1] 3611   16</code></pre>
+<pre class="r"><code>dim(rldDEGs_CTvsHDNSC)</code></pre>
+<pre><code>[1] 3611   16</code></pre>
+</div>
+<div id="save-upregulated-and-downregulated-genes-respectively-for-go-analysis." class="section level2">
+<h2>2.5 Save upregulated and downregulated genes respectively for GO analysis.</h2>
+<pre class="r"><code>upReg_CTvsHDNSC= rownames(nc_CTvsHDNSC[res_CTvsHDNSC$padj&lt;0.01 &amp; res_CTvsHDNSC$log2FoldChange&gt;0,])
+length(upReg_CTvsHDNSC)</code></pre>
+<pre><code>[1] 1983</code></pre>
+<pre class="r"><code>downReg_CTvsHDNSC = rownames(nc_CTvsHDNSC[res_CTvsHDNSC$padj&lt;0.01 &amp; res_CTvsHDNSC$log2FoldChange&lt;0,])
+length(downReg_CTvsHDNSC)</code></pre>
+<pre><code>[1] 1628</code></pre>
+<pre class="r"><code>write.table(upReg_CTvsHDNSC,file=&quot;upRegulated Genes in NSC.txt&quot;, sep=&quot;\t&quot;,  row.name=FALSE, col.names=&quot;Genes&quot;,quote=FALSE)
+write.table(downReg_CTvsHDNSC,file=&quot;downRegulated Genes in NSC.txt&quot;, sep=&quot;\t&quot;,  row.name=FALSE, col.names=&quot;Genes&quot;,quote=FALSE)</code></pre>
+</div>
+<div id="use-correlation-distance-to-look-at-the-complete-linkage-clustering-of-differentially-expressed-genes-identified-by-deseq2." class="section level2">
+<h2>2.6 Use correlation distance to look at the complete linkage clustering of differentially expressed genes identified by <strong>DESeq2</strong>.</h2>
+<pre class="r"><code>CorComplete=hclust(as.dist(1-cor(t(rldDEGs_CTvsHDNSC))))
+plot(CorComplete,main=&quot;Correlation, Complete&quot;)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-20-1.png" width="1248" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-20-1">
+Past versions of unnamed-chunk-20-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-20-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-20-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="draw-heatmap-of-differentially-expressed-genes." class="section level2">
+<h2>2.8 Draw heatmap of differentially expressed genes.</h2>
+<pre class="r"><code>rldDEGs_CTvsHDNSC_M = data.matrix(rldDEGs_CTvsHDNSC)
+heatmap.2(rldDEGs_CTvsHDNSC_M,distfun=function(x) as.dist(1-(cor(t(x)))), scale = &quot;row&quot;, trace = &quot;none&quot;,margins=c(8,8), main = &quot;CT_NSC vs HD_NSC&quot;)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-21-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-21-1">
+Past versions of unnamed-chunk-21-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-21-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-21-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr />
+</div>
+</div>
+<div id="differential-expression-analysis-of-hd-nsc-and-ct-nsc--edgr" class="section level1">
+<h1>3. Differential Expression Analysis of “HD NSC” and “CT NSC”- <strong>edgR</strong></h1>
+<div id="perform-exacttest-of-ct_nsc-and-hd_nsc-draw-histogram-of-p-values-adjust-p-values-to-qvalues-and-estimate-pi0" class="section level2">
+<h2>3.1 Perform <strong>exactTest</strong> of “CT_NSC” and “HD_NSC”, draw histogram of p-values, adjust p-values to qvalues and estimate pi0,</h2>
+<pre class="r"><code>exact.CTvsHDNSC=exactTest(d,pair=c(&quot;CT_NSC&quot;,&quot;HD_NSC&quot;))
+hist(exact.CTvsHDNSC$table$PValue, nclass=50, main = &quot;edgeR&quot;, xlab = &quot;p-values&quot;)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-22-1">
+Past versions of unnamed-chunk-22-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-22-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-22-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>edgeRq.CTvsHDNSC= qvalue(exact.CTvsHDNSC$table$PValue)
+edgeRq.CTvsHDNSC$pi0</code></pre>
+<pre><code>[1] 1</code></pre>
+</div>
+<div id="get-differential-expression-gene-number-from-edger-and-compare-the-result-with-those-obtained-from-deseq2." class="section level2">
+<h2>3.2 Get differential expression gene number from <strong>edgeR</strong>, and compare the result with those obtained from <strong>DESeq2</strong>.</h2>
+<pre class="r"><code>sum(edgeRq.CTvsHDNSC$qvalues&lt;0.01)</code></pre>
+<pre><code>[1] 3431</code></pre>
+<pre class="r"><code>upR_CTvsHDNSC_edgeR = sum(edgeRq.CTvsHDNSC$qvalues&lt;0.01 &amp; exact.CTvsHDNSC$table$logFC&gt;0)
+upR_CTvsHDNSC_edgeR</code></pre>
+<pre><code>[1] 1812</code></pre>
+<pre class="r"><code>downR_CTvsHDNSC_edgeR = sum(edgeRq.CTvsHDNSC$qvalues&lt;0.01 &amp; exact.CTvsHDNSC$table$logFC&lt;0)
+downR_CTvsHDNSC_edgeR</code></pre>
+<pre><code>[1] 1619</code></pre>
+<pre class="r"><code>vennDiagram(vennCounts(cbind(edgeRq.CTvsHDNSC$qvalues&lt;0.01,res_CTvsHDNSC$padj&lt;0.01),include=&quot;both&quot;),
+names=c(&quot;edgeR&quot;,&quot;DESeq2&quot;))</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-23-1">
+Past versions of unnamed-chunk-23-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-23-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-23-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr />
+</div>
+</div>
+<div id="differential-expression-analysis-of-hd-nsc-and-ct-nsc--deseq2-using-normalization-factors-from-tmm" class="section level1">
+<h1>4. Differential Expression Analysis of “HD NSC” and “CT NSC”- <strong>DESeq2</strong> using normalization factors from <strong>TMM</strong></h1>
+<div id="construct-deseqdataset-assign-normalization-factors-obtained-from-tmm-to-it-as-size-factors.-do-deseq2-analysis-with-such-pre-existing-size-factors." class="section level2">
+<h2>4.1 Construct <em>DESeqDataSet</em>, assign normalization factors obtained from <strong>TMM</strong> to it as size factors. Do <strong>DESeq2</strong> analysis with such pre-existing size factors.</h2>
+<pre class="r"><code>dds_2 = DESeqDataSetFromMatrix(countData=bigReads, colData=colData, design = ~ condition)
+sizeFactors(dds_2) = 1/d$samples$norm.factors
+dds_2 = DESeq(dds_2)</code></pre>
+<pre><code>using pre-existing size factors</code></pre>
+<pre><code>estimating dispersions</code></pre>
+<pre><code>gene-wise dispersion estimates</code></pre>
+<pre><code>mean-dispersion relationship</code></pre>
+<pre><code>final dispersion estimates</code></pre>
+<pre><code>fitting model and testing</code></pre>
+<pre><code>-- replacing outliers and refitting for 2 genes
+-- DESeq argument &#39;minReplicatesForReplace&#39; = 7 
+-- original counts are preserved in counts(dds)</code></pre>
+<pre><code>estimating dispersions</code></pre>
+<pre><code>fitting model and testing</code></pre>
+<pre class="r"><code>nc_2 = counts(dds_2,normalized=TRUE)
+rld_2 = assay(rlog(dds_2, blind = FALSE))</code></pre>
+<pre><code>rlog() may take a few minutes with 30 or more samples,
+vst() is a much faster transformation</code></pre>
+</div>
+<div id="extract-differential-expression-results-of-hd_nsc-vs-ct_nsc-from-dds_2." class="section level2">
+<h2>4.2 Extract differential expression results of “HD_NSC vs CT_NSC” from dds_2.</h2>
+<pre class="r"><code>res_CTvsHDNSC2 = results(dds_2, contrast = c(&quot;condition&quot;, &quot;HD_NSC&quot;, &quot;CT_NSC&quot;))</code></pre>
+</div>
+<div id="plot-histogram-of-p-values-and-estimate-pi0-with-qvalue-function.-1" class="section level2">
+<h2>4.3 Plot histogram of p-values and estimate pi0 with qvalue function.</h2>
+<pre class="r"><code>hist(res_CTvsHDNSC2$pvalue, nclass=50, main = &quot;DESeq2 with TMM&quot;, xlab = &quot;p-values&quot;)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-26-1">
+Past versions of unnamed-chunk-26-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-26-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-26-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>qDESeq_CTvsHDNSC2 = qvalue(res_CTvsHDNSC2$pvalue)
+qDESeq_CTvsHDNSC2$pi0</code></pre>
+<pre><code>[1] 0.9469034</code></pre>
+</div>
+<div id="repalce-genes-with-ajusted-pvalues-as-na-with-1-for-degs-calculation.-1" class="section level2">
+<h2>4.4 Repalce genes with ajusted pvalues as “NA” with 1 for DEGs calculation.</h2>
+<pre class="r"><code>NA_CTvsHDNSC2 = sum(is.na(res_CTvsHDNSC2$padj))
+nc_CTvsHDNSC2 = nc_2[, c(1:8, 17:24)]
+dim(nc_CTvsHDNSC2)</code></pre>
+<pre><code>[1] 18687    16</code></pre>
+<pre class="r"><code>rld_CTvsHDNSC2 = rld_2[,c(1:8, 17:24)]
+dim(rld_CTvsHDNSC2)</code></pre>
+<pre><code>[1] 18687    16</code></pre>
+<pre class="r"><code>res_CTvsHDNSC2[is.na(res_CTvsHDNSC2$padj),]$padj = rep(1, NA_CTvsHDNSC2)
+dim(res_CTvsHDNSC2)</code></pre>
+<pre><code>[1] 18687     6</code></pre>
+</div>
+<div id="save-rlog-transformed-data-of-differentially-expressed-genes-with-padj-0.01-for-data-visualization-later.-1" class="section level2">
+<h2>4.5 Save rlog transformed data of differentially expressed genes with padj &lt; 0.01 for data visualization later.</h2>
+<pre class="r"><code>sum(res_CTvsHDNSC2$padj&lt;0.01)</code></pre>
+<pre><code>[1] 1882</code></pre>
+<pre class="r"><code>DEGs_CTvsHDNSC2 = nc_CTvsHDNSC2[res_CTvsHDNSC2$padj&lt;0.01,]
+rldDEGs_CTvsHDNSC2 = rld_CTvsHDNSC2[res_CTvsHDNSC2$padj&lt;0.01,]
+dim(DEGs_CTvsHDNSC2)</code></pre>
+<pre><code>[1] 1882   16</code></pre>
+<pre class="r"><code>dim(rldDEGs_CTvsHDNSC2)</code></pre>
+<pre><code>[1] 1882   16</code></pre>
+</div>
+<div id="use-correlation-distance-to-look-at-complete-linkage-clustering-of-differentially-expressed-genes-identified-by-deseq2-with-size-factors-obtained-from-tmm." class="section level2">
+<h2>4.5 Use correlation distance to look at complete linkage clustering of differentially expressed genes identified by <strong>DESeq2</strong> with size factors obtained from <strong>TMM</strong>.</h2>
+<pre class="r"><code>CorComplete=hclust(as.dist(1-cor(t(rldDEGs_CTvsHDNSC2))))
+plot(CorComplete,main=&quot;Correlation, Complete&quot;)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-29-1.png" width="1248" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-29-1">
+Past versions of unnamed-chunk-29-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-29-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-29-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="draw-heatmap-of-differentially-expressed-genes.-1" class="section level2">
+<h2>4.6 Draw heatmap of differentially expressed genes.</h2>
+<pre class="r"><code>rldDEGs_CTvsHDNSC_M2 = data.matrix(rldDEGs_CTvsHDNSC2)
+heatmap.2(rldDEGs_CTvsHDNSC_M2,distfun=function(x) as.dist(1-(cor(t(x)))), scale = &quot;row&quot;, trace = &quot;none&quot;,margins=c(8,8))</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-30-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-30-1">
+Past versions of unnamed-chunk-30-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-30-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-30-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="comparing-edger-and-deseq2-and-deseq2-using-normalization-factors-from-tmm." class="section level2">
+<h2>4.7 Comparing <strong>edgeR</strong> and <strong>DESeq2</strong> and <strong>DESeq2</strong> using normalization factors from <strong>TMM</strong>.</h2>
+<pre class="r"><code>vennDiagram(vennCounts(cbind(edgeRq.CTvsHDNSC$qvalues&lt;0.01,res_CTvsHDNSC2$padj&lt;0.01 ),include=&quot;both&quot;),
+names=c(&quot;edgeR&quot;, &quot;DESeq2 TMM&quot;))</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-31-1">
+Past versions of unnamed-chunk-31-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-31-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-31-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>vennDiagram(vennCounts(cbind(res_CTvsHDNSC$padj&lt;0.01,res_CTvsHDNSC2$padj&lt;0.01),include=&quot;both&quot;),
+names=c(&quot;DESeq2&quot;, &quot;DESeq2 TMM&quot;))</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-31-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-31-2">
+Past versions of unnamed-chunk-31-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-31-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-31-2.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>vennDiagram(vennCounts(cbind(edgeRq.CTvsHDNSC$qvalues&lt;0.01,res_CTvsHDNSC$padj&lt;0.01, res_CTvsHDNSC2$padj&lt;0.01 ),include=&quot;both&quot;),
+names=c(&quot;edgeR&quot;,&quot;DESeq2&quot;, &quot;DESeq2 TMM&quot;))</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-31-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-31-3">
+Past versions of unnamed-chunk-31-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-31-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-31-3.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr />
+</div>
+</div>
+<div id="differential-expression-analysis-of-hd-ipscs-and-ct-ipscs--deseq2" class="section level1">
+<h1>5. Differential Expression Analysis of “HD iPSCs” and “CT iPSCs”- <strong>DESeq2</strong></h1>
+<div id="extract-differential-expression-results-of-hd_ipsc-vs-ct_ipsc-from-dds." class="section level2">
+<h2>5.1 Extract differential expression results of “HD_iPSC vs CT_iPSC” from dds.</h2>
+<pre class="r"><code>res_CTvsHDiPSC = results(dds, contrast = c(&quot;condition&quot;, &quot;HD_iPSC&quot;, &quot;CT_iPSC&quot;))</code></pre>
+</div>
+<div id="plot-histogram-of-p-values-and-estimate-pi0-with-qvalue-function.-2" class="section level2">
+<h2>5.2 Plot histogram of p-values and estimate pi0 with qvalue function.</h2>
+<pre class="r"><code>hist(res_CTvsHDiPSC$pvalue, nclass=50, main = &quot;DESeq2&quot;, xlab = &quot;p-values&quot;)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-33-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-33-1">
+Past versions of unnamed-chunk-33-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-33-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-33-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>qDESeq_CTvsHDiPSC = qvalue(res_CTvsHDiPSC$pvalue)
+qDESeq_CTvsHDiPSC$pi0</code></pre>
+<pre><code>[1] 0.8159955</code></pre>
+</div>
+<div id="repalce-genes-with-ajusted-pvalues-as-na-with-1-for-degs-calculation.-2" class="section level2">
+<h2>5.3 Repalce genes with ajusted pvalues as “NA” with 1 for DEGs calculation.</h2>
+<pre class="r"><code>#calculate number of &quot;NA&quot;
+NA_CTvsHDiPSC = sum(is.na(res_CTvsHDiPSC$padj))
+NA_CTvsHDiPSC</code></pre>
+<pre><code>[1] 1450</code></pre>
+<pre class="r"><code>#remove padj == NA
+nc_CTvsHDiPSC = nc[,c(9:16, 25:32)]
+dim(nc_CTvsHDiPSC)</code></pre>
+<pre><code>[1] 18687    16</code></pre>
+<pre class="r"><code>rld_CTvsHDiPSC = rld[,c(9:16, 25:32)]
+res_CTvsHDiPSC[is.na(res_CTvsHDiPSC$padj),]$padj = rep(1, NA_CTvsHDiPSC)
+dim(res_CTvsHDiPSC)</code></pre>
+<pre><code>[1] 18687     6</code></pre>
+</div>
+<div id="save-rlog-transformed-data-of-differentially-expressed-genes-with-padj-0.01-for-data-visualization-later.-2" class="section level2">
+<h2>5.4 Save rlog transformed data of differentially expressed genes with padj &lt; 0.01 for data visualization later.</h2>
+<pre class="r"><code>sum(res_CTvsHDiPSC$padj&lt;0.01)</code></pre>
+<pre><code>[1] 504</code></pre>
+<pre class="r"><code>DEGs_CTvsHDiPSC = nc_CTvsHDiPSC[res_CTvsHDiPSC$padj&lt;0.01,]
+dim(DEGs_CTvsHDiPSC)</code></pre>
+<pre><code>[1] 504  16</code></pre>
+<pre class="r"><code>rldDEGs_CTvsHDiPSC = rld_CTvsHDiPSC[res_CTvsHDiPSC$padj&lt;0.01,]
+dim(rldDEGs_CTvsHDiPSC)</code></pre>
+<pre><code>[1] 504  16</code></pre>
+</div>
+<div id="save-upregulated-and-downregulated-genes-respectively-for-go-analysis.-1" class="section level2">
+<h2>5.5 Save upregulated and downregulated genes respectively for GO analysis.</h2>
+<pre class="r"><code>upReg_TvsHDiPSC= rownames(nc_CTvsHDiPSC[res_CTvsHDiPSC$padj&lt;0.01 &amp; res_CTvsHDiPSC$log2FoldChange&gt;0,])
+length(upReg_TvsHDiPSC)</code></pre>
+<pre><code>[1] 275</code></pre>
+<pre class="r"><code>downReg_CTvsHDiPSC = rownames(nc_CTvsHDiPSC[res_CTvsHDiPSC$padj&lt;0.01 &amp; res_CTvsHDiPSC$log2FoldChange&lt;0,])
+length(downReg_CTvsHDiPSC)</code></pre>
+<pre><code>[1] 229</code></pre>
+<pre class="r"><code>write.table(upReg_TvsHDiPSC,file=&quot;upRegulated Genes CTvsHDiPSC.txt&quot;, sep=&quot;\t&quot;,  row.name=FALSE, col.names=&quot;Genes&quot;,quote=FALSE)
+write.table(downReg_CTvsHDiPSC,file=&quot;downRegulated Genes CTvsHDiPSC.txt&quot;, sep=&quot;\t&quot;,  row.name=FALSE, col.names=&quot;Genes&quot;,quote=FALSE)</code></pre>
+</div>
+<div id="use-correlation-distance-to-look-at-complete-linkage-clustering-of-differentially-expressed-genes-identified-by-deseq2." class="section level2">
+<h2>5.6 Use correlation distance to look at complete linkage clustering of differentially expressed genes identified by <strong>DESeq2</strong>.</h2>
+<pre class="r"><code>CorComplete=hclust(as.dist(1-cor(t(rldDEGs_CTvsHDiPSC))))
+plot(CorComplete,main=&quot;Correlation, Complete&quot;)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-37-1.png" width="1248" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-37-1">
+Past versions of unnamed-chunk-37-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-37-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-37-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="draw-heatmap-of-differentially-expressed-genes.-2" class="section level2">
+<h2>5.7 Draw heatmap of differentially expressed genes.</h2>
+<pre class="r"><code>rldDEGs_CTvsHDiPSC_M = data.matrix(rldDEGs_CTvsHDiPSC)
+heatmap.2(rldDEGs_CTvsHDiPSC_M,distfun=function(x) as.dist(1-(cor(t(x)))), scale = &quot;row&quot;, trace = &quot;none&quot;,margins=c(8,8), main = &quot;CT_iPSC vs HD_iPSC with DESeq2 &quot;)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-38-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-38-1">
+Past versions of unnamed-chunk-38-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-38-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-38-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr />
+</div>
+</div>
+<div id="differential-expression-analysis-of-hd-ipsc-and-ct-ipsc--edgr" class="section level1">
+<h1>6. Differential Expression Analysis of “HD iPSC” and “CT iPSC”- <strong>edgR</strong></h1>
+<div id="perform-exacttest-of-hd_ipsc-and-ct_ipsc-draw-histogram-of-p-values-adjust-p-values-to-qvalues-and-estimate-pi0" class="section level2">
+<h2>6.1 Perform <strong>exactTest</strong> of “HD_iPSC” and “CT_iPSC”, draw histogram of p-values, adjust p-values to qvalues and estimate pi0,</h2>
+<pre class="r"><code>exact.CTvsHDiPSC=exactTest(d,pair=c(&quot;CT_iPSC&quot;,&quot;HD_iPSC&quot;))
+hist(exact.CTvsHDiPSC$table$PValue, nclass=50, main = &quot;edgeR&quot;, xlab = &quot;p-values&quot;)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-39-1">
+Past versions of unnamed-chunk-39-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-39-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-39-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>edgeRq.CTvsHDiPSC= qvalue(exact.CTvsHDiPSC$table$PValue)
+edgeRq.CTvsHDiPSC$pi0</code></pre>
+<pre><code>[1] 1</code></pre>
+</div>
+<div id="get-differential-expression-gene-number-from-edger-and-compare-the-result-with-those-obtained-from-deseq2.-1" class="section level2">
+<h2>6.2 Get differential expression gene number from <strong>edgeR</strong>, and compare the result with those obtained from <strong>DESeq2</strong>.</h2>
+<pre class="r"><code>sum(edgeRq.CTvsHDiPSC$qvalues&lt;0.01)</code></pre>
+<pre><code>[1] 487</code></pre>
+<pre class="r"><code>upR_CTvsHDiPSC_edgeR = sum(edgeRq.CTvsHDiPSC$qvalues&lt;0.01 &amp; exact.CTvsHDiPSC$table$logFC&gt;0)
+upR_CTvsHDiPSC_edgeR</code></pre>
+<pre><code>[1] 236</code></pre>
+<pre class="r"><code>downR_CTvsHDiPSC_edgeR = sum(edgeRq.CTvsHDiPSC$qvalues&lt;0.01 &amp; exact.CTvsHDiPSC$table$logFC&lt;0)
+downR_CTvsHDiPSC_edgeR</code></pre>
+<pre><code>[1] 251</code></pre>
+<pre class="r"><code>vennDiagram(vennCounts(cbind(edgeRq.CTvsHDiPSC$qvalues&lt;0.01,res_CTvsHDiPSC$padj&lt;0.01),include=&quot;both&quot;),
+names=c(&quot;edgeR&quot;,&quot;DESeq2&quot;))</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-40-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-40-1">
+Past versions of unnamed-chunk-40-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-40-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-40-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr />
+</div>
+</div>
+<div id="differential-expression-analysis-of-hd-ipsc-and-ct-ipsc--deseq2-using-normalization-factors-from-tmm" class="section level1">
+<h1>7. Differential Expression Analysis of “HD iPSC” and “CT iPSC”- <strong>DESeq2</strong> using normalization factors from <strong>TMM</strong></h1>
+<div id="extract-differential-expression-results-of-ct_ipsc-vs-hd_ipsc-from-dds_2." class="section level2">
+<h2>7.1 Extract differential expression results of “CT_iPSC vs HD_iPSC” from dds_2.</h2>
+<pre class="r"><code>res_CTvsHDiPSC2 = results(dds_2, contrast = c(&quot;condition&quot;, &quot;HD_iPSC&quot;, &quot;CT_iPSC&quot;))</code></pre>
+</div>
+<div id="plot-histogram-of-p-values-and-estimate-pi0-with-qvalue-function.-3" class="section level2">
+<h2>7.2 Plot histogram of p-values and estimate pi0 with qvalue function.</h2>
+<pre class="r"><code>hist(res_CTvsHDiPSC2$pvalue, nclass=50, main = &quot;DESeq2 with TMM&quot;, xlab = &quot;p-values&quot;)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-42-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-42-1">
+Past versions of unnamed-chunk-42-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-42-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-42-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>qDESeq_CTvsHDiPSC2 = qvalue(res_CTvsHDiPSC2$pvalue)
+qDESeq_CTvsHDiPSC2$pi0</code></pre>
+<pre><code>[1] 0.9895484</code></pre>
+</div>
+<div id="remove-genes-with-ajusted-pvalues-as-na-from-results." class="section level2">
+<h2>7.3 Remove genes with ajusted pvalues as “NA” from results.</h2>
+<pre class="r"><code># Calculate the number of &quot;NA&quot;
+NA_CTvsHDiPSC2 = sum(is.na(res_CTvsHDiPSC2$padj))
+NA_CTvsHDiPSC2</code></pre>
+<pre><code>[1] 363</code></pre>
+<pre class="r"><code>#repalce padj == &quot;NA&quot; with 1
+nc_CTvsHDiPSC2 = nc_2[,c(9:16, 25:32)]
+dim(nc_CTvsHDiPSC2)</code></pre>
+<pre><code>[1] 18687    16</code></pre>
+<pre class="r"><code>rld_CTvsHDiPSC2 = rld_2[,c(9:16, 25:32)]
+res_CTvsHDiPSC2[is.na(res_CTvsHDiPSC2$padj),]$padj = rep(1, NA_CTvsHDiPSC2)
+dim(res_CTvsHDiPSC2)</code></pre>
+<pre><code>[1] 18687     6</code></pre>
+</div>
+<div id="save-rlog-transformed-data-of-differentially-expressed-genes-with-padj-0.01-for-data-visualization-later.-3" class="section level2">
+<h2>7.4 Save rlog transformed data of differentially expressed genes with padj &lt; 0.01 for data visualization later.</h2>
+<pre class="r"><code>sum(res_CTvsHDiPSC2$padj&lt;0.01)</code></pre>
+<pre><code>[1] 257</code></pre>
+<pre class="r"><code>DEGs_CTvsHDiPSC2 = nc_CTvsHDiPSC2[res_CTvsHDiPSC2$padj&lt;0.01,]
+dim(DEGs_CTvsHDiPSC2)</code></pre>
+<pre><code>[1] 257  16</code></pre>
+<pre class="r"><code>rldDEGs_CTvsHDiPSC2 = rld_CTvsHDiPSC2[res_CTvsHDiPSC2$padj&lt;0.01,]
+dim(rldDEGs_CTvsHDiPSC2)</code></pre>
+<pre><code>[1] 257  16</code></pre>
+</div>
+<div id="use-correlation-distance-to-look-at-complete-linkage-clustering-of-differentially-expressed-genes-identified-by-deseq2-with-size-factors-obtained-from-tmm.-1" class="section level2">
+<h2>7.5 Use correlation distance to look at complete linkage clustering of differentially expressed genes identified by <strong>DESeq2</strong> with size factors obtained from <strong>TMM</strong>.</h2>
+<pre class="r"><code>CorComplete=hclust(as.dist(1-cor(t(rldDEGs_CTvsHDiPSC2))))
+plot(CorComplete,main=&quot;Correlation, Complete&quot;)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-45-1.png" width="1248" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-45-1">
+Past versions of unnamed-chunk-45-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-45-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-45-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="draw-heatmap-of-differentially-expressed-genes.-3" class="section level2">
+<h2>7.6 Draw heatmap of differentially expressed genes.</h2>
+<pre class="r"><code>rldDEGs_CTvsHDiPSC_M2 = data.matrix(rldDEGs_CTvsHDiPSC2)
+heatmap.2(rldDEGs_CTvsHDiPSC_M2,distfun=function(x) as.dist(1-(cor(t(x)))), scale = &quot;row&quot;, trace = &quot;none&quot;,margins=c(8,8))</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-46-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-46-1">
+Past versions of unnamed-chunk-46-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-46-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-46-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="comparing-edger-and-deseq2-and-deseq2-using-normalization-factors-from-tmm.-1" class="section level2">
+<h2>7.7 Comparing <strong>edgeR</strong> and <strong>DESeq2</strong> and <strong>DESeq2</strong> using normalization factors from <strong>TMM</strong>.</h2>
+<pre class="r"><code>vennDiagram(vennCounts(cbind(edgeRq.CTvsHDiPSC$qvalues&lt;0.01, res_CTvsHDiPSC2$padj&lt;0.01)),include = &quot;both&quot;,
+names=c(&quot;edgeR&quot;, &quot;DESeq TMM&quot;))</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-47-1">
+Past versions of unnamed-chunk-47-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-47-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-47-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>vennDiagram(vennCounts(cbind(res_CTvsHDiPSC$padj&lt;0.01, res_CTvsHDiPSC2$padj&lt;0.01)),include = &quot;both&quot;,
+names=c(&quot;DESeq2&quot;, &quot;DESeq TMM&quot;))</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-47-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-47-2">
+Past versions of unnamed-chunk-47-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-47-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-47-2.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>vennDiagram(vennCounts(cbind(edgeRq.CTvsHDiPSC$qvalues&lt;0.01,res_CTvsHDiPSC$padj&lt;0.01, res_CTvsHDiPSC2$padj&lt;0.01)), include = &quot;both&quot;,
+names=c(&quot;edgeR&quot;,&quot;DESeq2&quot;, &quot;DESeq TMM&quot;))</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-47-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-47-3">
+Past versions of unnamed-chunk-47-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-47-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-47-3.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr />
+</div>
+</div>
+<div id="differential-expression-analysis-of-ct-nsc-and-ct-ipsc--deseq2" class="section level1">
+<h1>8. Differential Expression Analysis of “CT NSC” and “CT iPSC”- <strong>DESeq2</strong></h1>
+<div id="extract-differential-expression-results-of-ct_nsc-vs-ct_ipsc-from-dds." class="section level2">
+<h2>8.1 Extract differential expression results of “CT_NSC vs CT_iPSC” from dds.</h2>
+<pre class="r"><code>res_iPSCvsNSC = results(dds, contrast = c(&quot;condition&quot;, &quot;CT_NSC&quot;, &quot;CT_iPSC&quot;))</code></pre>
+</div>
+<div id="plot-histogram-of-p-values-and-estimate-pi0-with-qvalue-function.-4" class="section level2">
+<h2>8.2 Plot histogram of p-values and estimate pi0 with qvalue function.</h2>
+<pre class="r"><code>hist(res_iPSCvsNSC$pvalue, nclass=50, main = &quot;DESeq2&quot;, xlab = &quot;p-values&quot;)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-49-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-49-1">
+Past versions of unnamed-chunk-49-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-49-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-49-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>qDESeq_iPSCvsNSC  = qvalue(res_iPSCvsNSC$pvalue)
+qDESeq_iPSCvsNSC$pi0</code></pre>
+<pre><code>[1] 0.1106696</code></pre>
+</div>
+<div id="replace-genes-with-ajusted-pvalues-as-na-with-1-for-degs-calculation." class="section level2">
+<h2>8.3 Replace genes with ajusted pvalues as “NA” with 1 for DEGs calculation.</h2>
+<pre class="r"><code>NA_iPSCvsNSC = sum(is.na(res_iPSCvsNSC$padj))
+NA_iPSCvsNSC</code></pre>
+<pre><code>[1] 0</code></pre>
+<pre class="r"><code>res_iPSCvsNSC[is.na(res_iPSCvsNSC$padj),]$padj = rep(1, NA_iPSCvsNSC)
+dim(res_iPSCvsNSC)</code></pre>
+<pre><code>[1] 18687     6</code></pre>
+</div>
+<div id="calculate-the-number-of-differentially-expressed-genes-with-padj-0.01." class="section level2">
+<h2>8.4 calculate the number of differentially expressed genes with padj &lt; 0.01.</h2>
+<pre class="r"><code>sum(res_iPSCvsNSC$padj&lt;0.01)</code></pre>
+<pre><code>[1] 14141</code></pre>
+<hr />
+</div>
+</div>
+<div id="differential-expression-analysis-of-ct-nsc-and-ct-ipsc--edgr" class="section level1">
+<h1>9. Differential Expression Analysis of “CT NSC” and “CT iPSC”- <strong>edgR</strong></h1>
+<div id="perform-exacttest-of-ct-nsc-and-ct-ipsc-draw-histogram-of-p-values-adjust-p-values-to-qvalues-and-estimate-pi0" class="section level2">
+<h2>3.1 Perform <strong>exactTest</strong> of “CT NSC” and “CT iPSC”, draw histogram of p-values, adjust p-values to qvalues and estimate pi0,</h2>
+<pre class="r"><code>exact.iPSCvsNSC=exactTest(d,pair=c(&quot;CT_iPSC&quot;,&quot;CT_NSC&quot;))
+hist(exact.iPSCvsNSC$table$PValue, nclass=50, main = &quot;edgeR&quot;, xlab = &quot;p-values&quot;)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-52-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-52-1">
+Past versions of unnamed-chunk-52-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-52-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-52-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>edgeRq.iPSCvsNSC= qvalue(exact.iPSCvsNSC$table$PValue)
+edgeRq.iPSCvsNSC$pi0</code></pre>
+<pre><code>[1] 0.2572908</code></pre>
+</div>
+<div id="get-differential-expression-gene-number-from-edger-and-compare-the-result-with-those-obtained-from-deseq2.-2" class="section level2">
+<h2>9.2 Get differential expression gene number from <strong>edgeR</strong>, and compare the result with those obtained from <strong>DESeq2</strong>.</h2>
+<pre class="r"><code>sum(edgeRq.iPSCvsNSC$qvalues&lt;0.01)</code></pre>
+<pre><code>[1] 15061</code></pre>
+<pre class="r"><code>vennDiagram(vennCounts(cbind(edgeRq.iPSCvsNSC$qvalues&lt;0.01,res_iPSCvsNSC$padj&lt;0.01),include=&quot;both&quot;),
+names=c(&quot;edgeR&quot;,&quot;DESeq2&quot;))</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-53-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-53-1">
+Past versions of unnamed-chunk-53-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-53-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-53-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr />
+</div>
+</div>
+<div id="differential-expression-analysis-of-ct-nsc-and-ct-ipsc--deseq2-using-normalization-factors-from-tmm" class="section level1">
+<h1>10. Differential Expression Analysis of “CT NSC” and “CT iPSC”- <strong>DESeq2</strong> using normalization factors from <strong>TMM</strong></h1>
+<div id="extract-differential-expression-results-of-ct_nsc-vs-ct_ipsc-from-dds_2." class="section level2">
+<h2>10.1 Extract differential expression results of “CT_NSC vs CT_iPSC” from dds_2.</h2>
+<pre class="r"><code>res_iPSCvsNSC2 = results(dds_2, contrast = c(&quot;condition&quot;, &quot;CT_NSC&quot;, &quot;CT_iPSC&quot;))</code></pre>
+</div>
+<div id="plot-histogram-of-p-values-and-estimate-pi0-with-qvalue-function.-5" class="section level2">
+<h2>10.2 Plot histogram of p-values and estimate pi0 with qvalue function.</h2>
+<pre class="r"><code>hist(res_iPSCvsNSC2$pvalue, nclass=50, main = &quot;DESeq2 with TMM&quot;, xlab = &quot;p-values&quot;)</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-55-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-55-1">
+Past versions of unnamed-chunk-55-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-55-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-55-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>qDESeq_iPSCvsNSC2 = qvalue(res_iPSCvsNSC2$pvalue)
+qDESeq_iPSCvsNSC2$pi0</code></pre>
+<pre><code>[1] 0.152703</code></pre>
+</div>
+<div id="remove-genes-with-ajusted-pvalues-as-na-from-results.-1" class="section level2">
+<h2>10.3 Remove genes with ajusted pvalues as “NA” from results.</h2>
+<pre class="r"><code>NA_iPSCvsNSC2 = sum(is.na(res_iPSCvsNSC2$padj))
+NA_iPSCvsNSC2</code></pre>
+<pre><code>[1] 0</code></pre>
+<pre class="r"><code>res_iPSCvsNSC2[is.na(res_iPSCvsNSC2$padj),]$padj = rep(1, NA_iPSCvsNSC2)
+dim(res_iPSCvsNSC2)</code></pre>
+<pre><code>[1] 18687     6</code></pre>
+</div>
+<div id="calculate-the-number-of-differentially-expressed-genes-with-padj-0.01.-1" class="section level2">
+<h2>10.4 Calculate the number of differentially expressed genes with padj &lt; 0.01.</h2>
+<pre class="r"><code>sum(res_iPSCvsNSC2$padj&lt;0.01)</code></pre>
+<pre><code>[1] 13213</code></pre>
+</div>
+<div id="comparing-edger-and-deseq2-and-deseq2-using-normalization-factors-from-tmm.-2" class="section level2">
+<h2>10.5 Comparing <strong>edgeR</strong> and <strong>DESeq2</strong> and <strong>DESeq2</strong> using normalization factors from <strong>TMM</strong>.</h2>
+<pre class="r"><code>vennDiagram(vennCounts(cbind(edgeRq.iPSCvsNSC$qvalues&lt;0.01,res_iPSCvsNSC2$padj&lt;0.01),include=&quot;both&quot;),
+names=c(&quot;edgeR&quot;, &quot;DESeq2 TMM&quot;))</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-58-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-58-1">
+Past versions of unnamed-chunk-58-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-58-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-58-1.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>vennDiagram(vennCounts(cbind(res_iPSCvsNSC$padj&lt;0.01, res_iPSCvsNSC2$padj&lt;0.01),include=&quot;both&quot;),
+names=c(&quot;DESeq2&quot;, &quot;DESeq2 TMM&quot;))</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-58-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-58-2">
+Past versions of unnamed-chunk-58-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-58-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-58-2.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>vennDiagram(vennCounts(cbind(edgeRq.iPSCvsNSC$qvalues&lt;0.01,res_iPSCvsNSC$padj&lt;0.01, res_iPSCvsNSC2$padj&lt;0.01 ),include=&quot;both&quot;),names=c(&quot;edgeR&quot;,&quot;DESeq2&quot;, &quot;DESeq2 TMM&quot;))</code></pre>
+<p><img src="figure/project.Rmd/unnamed-chunk-58-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-58-3">
+Past versions of unnamed-chunk-58-3.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-58-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/34f40d388315995cae0fe0d3ae83546fd39cd776/docs/figure/project.Rmd/unnamed-chunk-58-3.png" target="_blank">34f40d3</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<hr />
+<pre class="r"><code>citation(&quot;hexbin&quot;)</code></pre>
+<pre><code>
+To cite package &#39;hexbin&#39; in publications use:
+
+  Dan Carr, ported by Nicholas Lewin-Koh, Martin Maechler and
+  contains copies of lattice functions written by Deepayan Sarkar
+  (2018). hexbin: Hexagonal Binning Routines. R package version
+  1.27.2. https://CRAN.R-project.org/package=hexbin
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {hexbin: Hexagonal Binning Routines},
+    author = {Dan Carr and ported by Nicholas Lewin-Koh and Martin Maechler and contains copies of lattice functions written by Deepayan Sarkar},
+    year = {2018},
+    note = {R package version 1.27.2},
+    url = {https://CRAN.R-project.org/package=hexbin},
+  }
+
+ATTENTION: This citation information has been auto-generated from
+the package DESCRIPTION file and may need manual editing, see
+&#39;help(&quot;citation&quot;)&#39;.</code></pre>
+<pre class="r"><code>citation(&quot;RColorBrewer&quot;)</code></pre>
+<pre><code>
+To cite package &#39;RColorBrewer&#39; in publications use:
+
+  Erich Neuwirth (2014). RColorBrewer: ColorBrewer Palettes. R
+  package version 1.1-2.
+  https://CRAN.R-project.org/package=RColorBrewer
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {RColorBrewer: ColorBrewer Palettes},
+    author = {Erich Neuwirth},
+    year = {2014},
+    note = {R package version 1.1-2},
+    url = {https://CRAN.R-project.org/package=RColorBrewer},
+  }</code></pre>
+<pre class="r"><code>citation(&quot;pca3d&quot;)</code></pre>
+<pre><code>
+To cite package &#39;pca3d&#39; in publications use:
+
+  January Weiner (2017). pca3d: Three Dimensional PCA Plots. R
+  package version 0.10. https://CRAN.R-project.org/package=pca3d
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {pca3d: Three Dimensional PCA Plots},
+    author = {January Weiner},
+    year = {2017},
+    note = {R package version 0.10},
+    url = {https://CRAN.R-project.org/package=pca3d},
+  }
+
+ATTENTION: This citation information has been auto-generated from
+the package DESCRIPTION file and may need manual editing, see
+&#39;help(&quot;citation&quot;)&#39;.</code></pre>
+<pre class="r"><code>citation(&quot;gplots&quot;)</code></pre>
+<pre><code>
+To cite package &#39;gplots&#39; in publications use:
+
+  Gregory R. Warnes, Ben Bolker, Lodewijk Bonebakker, Robert
+  Gentleman, Wolfgang Huber Andy Liaw, Thomas Lumley, Martin
+  Maechler, Arni Magnusson, Steffen Moeller, Marc Schwartz and
+  Bill Venables (2016). gplots: Various R Programming Tools for
+  Plotting Data. R package version 3.0.1.
+  https://CRAN.R-project.org/package=gplots
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {gplots: Various R Programming Tools for Plotting Data},
+    author = {Gregory R. Warnes and Ben Bolker and Lodewijk Bonebakker and Robert Gentleman and Wolfgang Huber Andy Liaw and Thomas Lumley and Martin Maechler and Arni Magnusson and Steffen Moeller and Marc Schwartz and Bill Venables},
+    year = {2016},
+    note = {R package version 3.0.1},
+    url = {https://CRAN.R-project.org/package=gplots},
+  }
+
+ATTENTION: This citation information has been auto-generated from
+the package DESCRIPTION file and may need manual editing, see
+&#39;help(&quot;citation&quot;)&#39;.</code></pre>
+<pre class="r"><code>citation(&quot;FactoMineR&quot;)</code></pre>
+<pre><code>
+To cite FactoMineR in publications use:
+
+  Sebastien Le, Julie Josse, Francois Husson (2008). FactoMineR:
+  An R Package for Multivariate Analysis. Journal of Statistical
+  Software, 25(1), 1-18. 10.18637/jss.v025.i01
+
+A BibTeX entry for LaTeX users is
+
+  @Article{,
+    title = {{FactoMineR}: A Package for Multivariate Analysis},
+    author = {S\&#39;ebastien L\^e and Julie Josse and Fran\c{c}ois Husson},
+    journal = {Journal of Statistical Software},
+    year = {2008},
+    volume = {25},
+    number = {1},
+    pages = {1--18},
+    doi = {10.18637/jss.v025.i01},
+  }</code></pre>
+<pre class="r"><code>citation(&quot;qvalue&quot;)</code></pre>
+<pre><code>
+To cite package &#39;qvalue&#39; in publications use:
+
+  John D. Storey with contributions from Andrew J. Bass, Alan
+  Dabney and David Robinson (2015). qvalue: Q-value estimation for
+  false discovery rate control. R package version 2.12.0.
+  http://github.com/jdstorey/qvalue
+
+A BibTeX entry for LaTeX users is
+
+  @Manual{,
+    title = {qvalue: Q-value estimation for false discovery rate control},
+    author = {John D. Storey with contributions from Andrew J. Bass and Alan Dabney and David Robinson},
+    year = {2015},
+    note = {R package version 2.12.0},
+    url = {http://github.com/jdstorey/qvalue},
+  }
+
+ATTENTION: This citation information has been auto-generated from
+the package DESCRIPTION file and may need manual editing, see
+&#39;help(&quot;citation&quot;)&#39;.</code></pre>
+<pre class="r"><code>citation(&quot;edgeR&quot;)</code></pre>
+<pre><code>
+See Section 1.2 in the User&#39;s Guide for more detail about how to
+cite the different edgeR pipelines.
+
+  Robinson MD, McCarthy DJ and Smyth GK (2010). edgeR: a
+  Bioconductor package for differential expression analysis of
+  digital gene expression data. Bioinformatics 26, 139-140
+
+  McCarthy DJ, Chen Y and Smyth GK (2012). Differential expression
+  analysis of multifactor RNA-Seq experiments with respect to
+  biological variation. Nucleic Acids Research 40, 4288-4297
+
+To see these entries in BibTeX format, use &#39;print(&lt;citation&gt;,
+bibtex=TRUE)&#39;, &#39;toBibtex(.)&#39;, or set
+&#39;options(citation.bibtex.max=999)&#39;.</code></pre>
+<pre class="r"><code>citation(&quot;DESeq2&quot;)</code></pre>
+<pre><code>
+  Love, M.I., Huber, W., Anders, S. Moderated estimation of fold
+  change and dispersion for RNA-seq data with DESeq2 Genome
+  Biology 15(12):550 (2014)
+
+A BibTeX entry for LaTeX users is
+
+  @Article{,
+    title = {Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2},
+    author = {Michael I. Love and Wolfgang Huber and Simon Anders},
+    year = {2014},
+    journal = {Genome Biology},
+    doi = {10.1186/s13059-014-0550-8},
+    volume = {15},
+    issue = {12},
+    pages = {550},
+  }</code></pre>
+<hr />
+</div>
+</div>
+<div id="sessioninfo" class="section level1">
+<h1>SessionInfo</h1>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.5.1 (2018-07-02)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 16299)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_United States.1252 
+[2] LC_CTYPE=English_United States.1252   
+[3] LC_MONETARY=English_United States.1252
+[4] LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.1252    
+
+attached base packages:
+[1] parallel  stats4    stats     graphics  grDevices utils     datasets 
+[8] methods   base     
+
+other attached packages:
+ [1] pca3d_0.10                  RColorBrewer_1.1-2         
+ [3] gplots_3.0.1                FactoMineR_1.41            
+ [5] qvalue_2.12.0               edgeR_3.22.5               
+ [7] limma_3.36.5                DESeq2_1.20.0              
+ [9] SummarizedExperiment_1.10.1 DelayedArray_0.6.5         
+[11] BiocParallel_1.14.2         matrixStats_0.54.0         
+[13] Biobase_2.40.0              GenomicRanges_1.32.6       
+[15] GenomeInfoDb_1.16.0         IRanges_2.14.11            
+[17] S4Vectors_0.18.3            BiocGenerics_0.26.0        
+[19] hexbin_1.27.2              
+
+loaded via a namespace (and not attached):
+ [1] bitops_1.0-6            fs_1.3.1               
+ [3] bit64_0.9-7             webshot_0.5.1          
+ [5] rprojroot_1.3-2         tools_3.5.1            
+ [7] backports_1.1.2         R6_2.3.0               
+ [9] KernSmooth_2.23-15      rpart_4.1-13           
+[11] Hmisc_4.1-1             DBI_1.0.0              
+[13] lazyeval_0.2.1          colorspace_1.3-2       
+[15] manipulateWidget_0.10.0 nnet_7.3-12            
+[17] tidyselect_0.2.5        gridExtra_2.3          
+[19] bit_1.1-14              compiler_3.5.1         
+[21] git2r_0.25.2            htmlTable_1.12         
+[23] flashClust_1.01-2       caTools_1.17.1.1       
+[25] scales_1.0.0            checkmate_1.8.5        
+[27] genefilter_1.62.0       stringr_1.3.1          
+[29] digest_0.6.18           foreign_0.8-71         
+[31] rmarkdown_1.10          XVector_0.20.0         
+[33] base64enc_0.1-3         pkgconfig_2.0.2        
+[35] htmltools_0.3.6         htmlwidgets_1.3        
+[37] rlang_0.3.0.1           rstudioapi_0.8         
+[39] RSQLite_2.1.1           shiny_1.2.0            
+[41] bindr_0.1.1             jsonlite_1.5           
+[43] crosstalk_1.0.0         gtools_3.8.1           
+[45] acepack_1.4.1           dplyr_0.7.8            
+[47] RCurl_1.95-4.11         magrittr_1.5           
+[49] GenomeInfoDbData_1.2.0  Formula_1.2-3          
+[51] leaps_3.0               Matrix_1.2-14          
+[53] Rcpp_1.0.0              munsell_0.5.0          
+[55] scatterplot3d_0.3-41    stringi_1.2.4          
+[57] whisker_0.3-2           yaml_2.2.0             
+[59] MASS_7.3-50             zlibbioc_1.26.0        
+[61] plyr_1.8.4              grid_3.5.1             
+[63] blob_1.1.1              promises_1.0.1         
+[65] gdata_2.18.0            crayon_1.3.4           
+[67] miniUI_0.1.1.1          lattice_0.20-35        
+[69] splines_3.5.1           annotate_1.58.0        
+[71] locfit_1.5-9.1          knitr_1.20             
+[73] pillar_1.3.0            geneplotter_1.58.0     
+[75] reshape2_1.4.3          XML_3.98-1.16          
+[77] glue_1.3.0              evaluate_0.12          
+[79] latticeExtra_0.6-28     data.table_1.11.8      
+[81] httpuv_1.4.5            gtable_0.2.0           
+[83] purrr_0.2.5             assertthat_0.2.0       
+[85] ggplot2_3.1.0           mime_0.6               
+[87] xtable_1.8-3            later_0.7.5            
+[89] survival_2.42-6         tibble_1.4.2           
+[91] ellipse_0.4.1           AnnotationDbi_1.42.1   
+[93] memoise_1.1.0           workflowr_1.3.0        
+[95] bindrcpp_0.2.2          cluster_2.0.7-1        
+[97] statmod_1.4.30          rgl_0.99.16            </code></pre>
+<pre class="r"><code>print(gc())</code></pre>
+<pre><code>           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5609341 299.6   14548608 777.0 14548608 777.0
+Vcells 29060972 221.8   64932027 495.4 64932026 495.4</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.5.1 (2018-07-02)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 16299)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_United States.1252 
+[2] LC_CTYPE=English_United States.1252   
+[3] LC_MONETARY=English_United States.1252
+[4] LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.1252    
+
+attached base packages:
+[1] parallel  stats4    stats     graphics  grDevices utils     datasets 
+[8] methods   base     
+
+other attached packages:
+ [1] pca3d_0.10                  RColorBrewer_1.1-2         
+ [3] gplots_3.0.1                FactoMineR_1.41            
+ [5] qvalue_2.12.0               edgeR_3.22.5               
+ [7] limma_3.36.5                DESeq2_1.20.0              
+ [9] SummarizedExperiment_1.10.1 DelayedArray_0.6.5         
+[11] BiocParallel_1.14.2         matrixStats_0.54.0         
+[13] Biobase_2.40.0              GenomicRanges_1.32.6       
+[15] GenomeInfoDb_1.16.0         IRanges_2.14.11            
+[17] S4Vectors_0.18.3            BiocGenerics_0.26.0        
+[19] hexbin_1.27.2              
+
+loaded via a namespace (and not attached):
+ [1] bitops_1.0-6            fs_1.3.1               
+ [3] bit64_0.9-7             webshot_0.5.1          
+ [5] rprojroot_1.3-2         tools_3.5.1            
+ [7] backports_1.1.2         R6_2.3.0               
+ [9] KernSmooth_2.23-15      rpart_4.1-13           
+[11] Hmisc_4.1-1             DBI_1.0.0              
+[13] lazyeval_0.2.1          colorspace_1.3-2       
+[15] manipulateWidget_0.10.0 nnet_7.3-12            
+[17] tidyselect_0.2.5        gridExtra_2.3          
+[19] bit_1.1-14              compiler_3.5.1         
+[21] git2r_0.25.2            htmlTable_1.12         
+[23] flashClust_1.01-2       caTools_1.17.1.1       
+[25] scales_1.0.0            checkmate_1.8.5        
+[27] genefilter_1.62.0       stringr_1.3.1          
+[29] digest_0.6.18           foreign_0.8-71         
+[31] rmarkdown_1.10          XVector_0.20.0         
+[33] base64enc_0.1-3         pkgconfig_2.0.2        
+[35] htmltools_0.3.6         htmlwidgets_1.3        
+[37] rlang_0.3.0.1           rstudioapi_0.8         
+[39] RSQLite_2.1.1           shiny_1.2.0            
+[41] bindr_0.1.1             jsonlite_1.5           
+[43] crosstalk_1.0.0         gtools_3.8.1           
+[45] acepack_1.4.1           dplyr_0.7.8            
+[47] RCurl_1.95-4.11         magrittr_1.5           
+[49] GenomeInfoDbData_1.2.0  Formula_1.2-3          
+[51] leaps_3.0               Matrix_1.2-14          
+[53] Rcpp_1.0.0              munsell_0.5.0          
+[55] scatterplot3d_0.3-41    stringi_1.2.4          
+[57] whisker_0.3-2           yaml_2.2.0             
+[59] MASS_7.3-50             zlibbioc_1.26.0        
+[61] plyr_1.8.4              grid_3.5.1             
+[63] blob_1.1.1              promises_1.0.1         
+[65] gdata_2.18.0            crayon_1.3.4           
+[67] miniUI_0.1.1.1          lattice_0.20-35        
+[69] splines_3.5.1           annotate_1.58.0        
+[71] locfit_1.5-9.1          knitr_1.20             
+[73] pillar_1.3.0            geneplotter_1.58.0     
+[75] reshape2_1.4.3          XML_3.98-1.16          
+[77] glue_1.3.0              evaluate_0.12          
+[79] latticeExtra_0.6-28     data.table_1.11.8      
+[81] httpuv_1.4.5            gtable_0.2.0           
+[83] purrr_0.2.5             assertthat_0.2.0       
+[85] ggplot2_3.1.0           mime_0.6               
+[87] xtable_1.8-3            later_0.7.5            
+[89] survival_2.42-6         tibble_1.4.2           
+[91] ellipse_0.4.1           AnnotationDbi_1.42.1   
+[93] memoise_1.1.0           workflowr_1.3.0        
+[95] bindrcpp_0.2.2          cluster_2.0.7-1        
+[97] statmod_1.4.30          rgl_0.99.16            </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

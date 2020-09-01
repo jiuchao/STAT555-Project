@@ -8,6 +8,6 @@ editor_options:
   chunk_output_type: console
 ---
 
-**Welcome to my research website.**
+Welcome to my research website.
 
-Hi, this is Jiu-Chao Yin. This website is the final research project in class [STAT 555](https://newonlinecourses.science.psu.edu/stat555/).
+This website is to demonstrate the class project for [STAT555](https://newonlinecourses.science.psu.edu/stat555/).

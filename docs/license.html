@@ -22,6 +22,9 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -176,7 +179,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">STAT555-Project</a>
+      <a class="navbar-brand" href="index.html">STAT555-RNAseq</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -187,11 +190,23 @@ $(document).ready(function () {
   <a href="about.html">About</a>
 </li>
 <li>
+  <a href="project.html">Data Analysis</a>
+</li>
+<li>
+  <a href="results.html">Results and Discussion</a>
+</li>
+<li>
   <a href="license.html">License</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/jiuchao/STAT555-RNAseq">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -239,7 +254,7 @@ div.section {
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
-<strong>Knit directory:</strong> <code>STAT555-Project/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+<strong>Knit directory:</strong> <code>STAT555-RNAseq/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
 </p>
 <p>
 This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
@@ -264,16 +279,33 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrong89e8242"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> 89e8242 </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjiuchaoSTAT555RNAseqtree5483586db2e48944d3e256f1f7fb8226017466aftargetblank5483586a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jiuchao/STAT555-RNAseq/tree/5483586db2e48944d3e256f1f7fb8226017466af" target="_blank">5483586</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrong89e8242" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjiuchaoSTAT555RNAseqtree5483586db2e48944d3e256f1f7fb8226017466aftargetblank5483586a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
-working directory clean
+Ignored files:
+    Ignored:    analysis/figure/
+
+Untracked files:
+    Untracked:  DESeq2 size factors.csv
+    Untracked:  TMM normalization factors.csv
+    Untracked:  analysis/GSE74201_rawReadCounts.csv
+    Untracked:  docs/assets/
+    Untracked:  downRegulated Genes CTvsHDiPSC.txt
+    Untracked:  downRegulated Genes in NSC.txt
+    Untracked:  pca3d.tiff
+    Untracked:  summary of pca.csv
+    Untracked:  upRegulated Genes CTvsHDiPSC.txt
+    Untracked:  upRegulated Genes in NSC.txt
+
+Unstaged changes:
+    Modified:   analysis/index.Rmd
+
 </code></pre>
 <p>
 Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
@@ -316,7 +348,24 @@ Message
 html
 </td>
 <td>
-89e8242
+<a href="https://rawcdn.githack.com/jiuchao/STAT555-RNAseq/4e2fc972e065d5f03b84b89f5a175f50f6cb9845/docs/license.html" target="_blank">4e2fc97</a>
+</td>
+<td>
+jiuchao
+</td>
+<td>
+2019-06-06
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jiuchao/STAT555-RNAseq/f3ca2d22a53e08a15730f04c5e49a41cd502c6c7/docs/license.html" target="_blank">f3ca2d2</a>
 </td>
 <td>
 jiuchao
@@ -333,7 +382,7 @@ Build site.
 Rmd
 </td>
 <td>
-96075ae
+<a href="https://github.com/jiuchao/STAT555-RNAseq/blob/65bd420e518d82eed79a91940d2d83fed20f72b2/analysis/license.Rmd" target="_blank">65bd420</a>
 </td>
 <td>
 jiuchao
